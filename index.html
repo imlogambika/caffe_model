@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentinel Vision Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.2/heatmap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="logo-section">
+                <h2>Sentinel Vision</h2>
+                <p class="subtitle">Women Safety Dashboard</p>
+            </div>
+            <div class="menu-options">
+                <button class="menu-btn active">
+                    <i class="fas fa-video"></i>
+                    Camera View
+                </button>
+                <button class="menu-btn">
+                    <i class="fas fa-map"></i>
+                    Heat Map
+                </button>
+                <button class="menu-btn">
+                    <i class="fas fa-history"></i>
+                    Recent History
+                </button>
+            </div>
+            <div class="safety-message">
+                <p>Safety is our shared responsibility</p>
+                <div class="status-indicator">System Active</div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="camera-grid" id="cameraView">
+                <div class="camera-feed">
+                    <div class="camera-header">
+                        <h3>Camera 1</h3>
+                        <span class="status-badge active">Live</span>
+                    </div>
+                    <div class="video-placeholder">
+                        <i class="fas fa-video camera-icon"></i>
+                    </div>
+                </div>
+                <div class="camera-feed">
+                    <div class="camera-header">
+                        <h3>Camera 2</h3>
+                        <span class="status-badge active">Live</span>
+                    </div>
+                    <div class="video-placeholder">
+                        <i class="fas fa-video camera-icon"></i>
+                    </div>
+                </div>
+                <div class="camera-feed">
+                    <div class="camera-header">
+                        <h3>Camera 3</h3>
+                        <span class="status-badge active">Live</span>
+                    </div>
+                    <div class="video-placeholder">
+                        <i class="fas fa-video camera-icon"></i>
+                    </div>
+                </div>
+                <div class="camera-feed">
+                    <div class="camera-header">
+                        <h3>Camera 4</h3>
+                        <span class="status-badge active">Live</span>
+                    </div>
+                    <div class="video-placeholder">
+                        <i class="fas fa-video camera-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="heatmap-container" id="heatmapView" style="display: none;">
+                <div class="heatmap-grid">
+                    <div class="heatmap-cell">
+                        <h3>Zone 1</h3>
+                        <div class="heatmap-area" id="heatmap1"></div>
+                    </div>
+                    <div class="heatmap-cell">
+                        <h3>Zone 2</h3>
+                        <div class="heatmap-area" id="heatmap2"></div>
+                    </div>
+                    <div class="heatmap-cell">
+                        <h3>Zone 3</h3>
+                        <div class="heatmap-area" id="heatmap3"></div>
+                    </div>
+                    <div class="heatmap-cell">
+                        <h3>Zone 4</h3>
+                        <div class="heatmap-area" id="heatmap4"></div>
+                    </div>
+                </div>
+                <div class="heatmap-legend">
+                    <span class="legend-item low">Low Activity</span>
+                    <span class="legend-item medium">Medium Activity</span>
+                    <span class="legend-item high">High Activity</span>
+                </div>
+            </div>
+
+            <div class="history-container" id="historyView" style="display: none;">
+                <div class="history-filters">
+                    <select id="cameraFilter">
+                        <option value="all">All Cameras</option>
+                        <option value="1">Camera 1</option>
+                        <option value="2">Camera 2</option>
+                        <option value="3">Camera 3</option>
+                        <option value="4">Camera 4</option>
+                    </select>
+                    <input type="date" id="dateFilter">
+                </div>
+                <div class="history-content">
+                    <table id="historyTable">
+                        <thead>
+                            <tr>
+                                <th>Camera</th>
+                                <th>Event Type</th>
+                                <th>Date & Time</th>
+                                <th>Location</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="status-table">
+                <div class="section-header">
+                    <h2>System Status</h2>
+                    <p class="subtitle">Real-time monitoring status</p>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Camera</th>
+                            <th>Status</th>
+                            <th>Issue</th>
+                            <th>Last Updated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Camera 1</td>
+                            <td class="status-active">Active</td>
+                            <td>None</td>
+                            <td class="timestamp">Just now</td>
+                        </tr>
+                        <tr>
+                            <td>Camera 2</td>
+                            <td class="status-active">Active</td>
+                            <td>None</td>
+                            <td class="timestamp">Just now</td>
+                        </tr>
+                        <tr>
+                            <td>Camera 3</td>
+                            <td class="status-active">Active</td>
+                            <td>None</td>
+                            <td class="timestamp">Just now</td>
+                        </tr>
+                        <tr>
+                            <td>Camera 4</td>
+                            <td class="status-active">Active</td>
+                            <td>None</td>
+                            <td class="timestamp">Just now</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
