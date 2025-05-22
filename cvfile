@@ -1,0 +1,54 @@
+import cv2
+
+# Load pre-trained model and label information
+# Use a Caffe model trained for gender classification
+model = "deploy_gender.prototxt"
+weights = "gender_net.caffemodel"
+gender_list = ['Male', 'Female']
+
+# Load the pre-trained gender model
+net = cv2.dnn.readNetFromCaffe(model, weights)
+
+# Initialize webcam
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("Error: Could not access the webcam.")
+    exit()
+
+print("Press 'q' to exit.")
+
+# Process the video stream frame by frame
+while True:
+    # Capture frame-by-frame
+    ret, frame = cap.read()
+    if not ret:
+        print("Error: Unable to capture video.")
+        break
+
+    # Convert frame to blob format for input to the model
+    blob = cv2.dnn.blobFromImage(frame, scalefactor=1.0, size=(227, 227), mean=(78.4263377603, 87.7689143744, 114.895847746), swapRB=False, crop=False)
+
+    # Set the input to the pre-trained model
+    net.setInput(blob)
+
+    # Predict gender
+    gender_preds = net.forward()
+    gender = gender_list[gender_preds[0].argmax()]
+
+    # Display the prediction on the video
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    text = f"Gender: {gender}"
+    cv2.putText(frame, text, (10, 50), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
+
+    # Show the frame
+    cv2.imshow("Gender Detection", frame)
+
+    # Break the loop if 'q' is pressed
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        print("Exiting...")
+        break
+
+# Release resources
+cap.release()
+cv2.destroyAllWindows()
